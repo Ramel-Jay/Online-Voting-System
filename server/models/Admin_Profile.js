@@ -25,5 +25,10 @@ module.exports = ( sequelize, DataTypes ) => {
             allowNull:      false,
         },
     });
+    // Admin_Profile.associate = (models) => {
+    //     Admin_Profile.hasMany(models.Admin_Account, {
+    //         onDelete: "cascade",
+    //     });
+    // };
     return Admin_Profile;
 };

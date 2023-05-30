@@ -17,7 +17,7 @@ module.exports = ( sequelize, DataTypes ) => {
             allowNull: false,
         },
         number: {
-            type: Datatypes.BIGINT,
+            type: DataTypes.BIGINT,
             allowNull: false
         }
     });
