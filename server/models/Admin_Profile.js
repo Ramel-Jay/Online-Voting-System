@@ -16,7 +16,7 @@ module.exports = ( sequelize, DataTypes ) => {
             type:           DataTypes.STRING,
             allowNull:      false,
         },
-        number: {
+        mobile_number: {
             type:           DataTypes.BIGINT,
             allowNull:      false,
         },
@@ -24,11 +24,18 @@ module.exports = ( sequelize, DataTypes ) => {
             type:           DataTypes.STRING,
             allowNull:      false,
         },
+        email: { 
+            type:           DataTypes.STRING,
+            allowNull:      false,
+        },
+        password: {
+            type:           DataTypes.STRING,
+            allowNull:      false,
+        },
+        avatar_url: {
+            type:           DataTypes.STRING,
+            allowNull:      false,
+        },
     });
-    // Admin_Profile.associate = (models) => {
-    //     Admin_Profile.hasMany(models.Admin_Account, {
-    //         onDelete: "cascade",
-    //     });
-    // };
     return Admin_Profile;
 };
