@@ -1,12 +1,25 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const router = express.Router();
 const { Admin_Profile } = require('../models');
+const bycrypt  = require('bcryptjs');
+const multer  = require('multer');
+const path = require('path');
+const cookieParser = require('cookie-parser');
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/avatar');
+    },
+    filename:  (req, file, cb) => {
+        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
+    }
+});
 
 router.post('/AdminProfile', async(req, res) => {
     try{
