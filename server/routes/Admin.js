@@ -11,7 +11,8 @@ const cookieParser = require('cookie-parser');
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
-app.use(express.static('../public'));
+// app.use(express.static(`public`));
+app.use('/avatar',express.static(path.join(__dirname, 'public')));
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -70,7 +71,7 @@ router.post('/AdminProfile', upload.single('avatar_url'), async(req, res) => {
     }
 });
 
-router.get("/", async (req, res) => {
+router.get("/admins", async (req, res) => {
     const admin = await Admin_Profile.findAll();
     res.json(admin);
 });

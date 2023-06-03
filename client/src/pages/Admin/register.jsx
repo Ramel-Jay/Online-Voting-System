@@ -41,7 +41,7 @@ function register() {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:3001/admins").then((response) => {
+        axios.get("http://localhost:3001/admins/").then((response) => {
             if(response.data.error){
                 alert(response.data.error);
             }
@@ -168,7 +168,7 @@ function register() {
                                 return(
                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={key}>
                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center">
-                                            <img className="w-10 h-10 rounded-full" src={value.avatar_url}/> <p >{value.first_name} {value.last_name}</p>
+                                            <img className="w-10 h-10 rounded-full" src={`http://localhost:3001/avatar/${value?.avatar_url}`}/> <p >{value.first_name} {value.last_name}</p>
                                         </th>
                                         <td className="px-6 py-4">
                                             Silver
