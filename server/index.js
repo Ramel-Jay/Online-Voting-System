@@ -18,7 +18,7 @@ const db = require('./models');
 
 //Routers
 const AdminRouter = require('./routes/Admin');
-app.use('/admin', AdminRouter);
+app.use('/', AdminRouter);
 
 db.sequelize.sync().then(() => {
     app.listen(3001, () => {
