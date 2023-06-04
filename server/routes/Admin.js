@@ -34,6 +34,8 @@ const upload = multer({
     }
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 router.post('/AdminProfile', upload.single('avatar_url'), async(req, res) => {
     try{
         const{
