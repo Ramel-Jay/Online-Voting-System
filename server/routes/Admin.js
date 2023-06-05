@@ -3,10 +3,11 @@ const app = express();
 const cors = require('cors');
 const router = express.Router();
 const { Admin_Profile } = require('../models');
-const bycrypt  = require('bcryptjs');
+const bcrypt  = require('bcryptjs');
 const multer  = require('multer');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const { createToken, validateToken, removeToken } = require('../middleware/JWT');
 
 app.use(express.json());
 app.use(cookieParser());
@@ -32,14 +33,6 @@ const upload = multer({
     }
 });
 
-// app.use('/avatar',express.static('public'));
-// app.use('/avatar',express.static(path.join(__dirname, '../public/avatar')));
-// app.use('/', express.static(__dirname + '../public/avatar'));
-// app.use('/avatar', express.static(__dirname + '../public/avatar'));
-
-// const profileImage = path.resolve(__dirname, '../public');
-// app.use(express.static(profileImage));
-
 router.post('/AdminProfile', upload.single('avatar_url'), async(req, res) => {
     try{
         const{
@@ -53,7 +46,7 @@ router.post('/AdminProfile', upload.single('avatar_url'), async(req, res) => {
             password,
             avatar_url = req.file.filename,
         } = req.body;
-        bycrypt.hash(password, 10).then((hash) => {
+        bcrypt.hash(password, 10).then((hash) => {
             Admin_Profile.create({
                 first_name:     first_name,
                 last_name:      last_name,
@@ -80,6 +73,35 @@ router.post('/AdminProfile', upload.single('avatar_url'), async(req, res) => {
 router.get("/", async (req, res) => {
     const admin = await Admin_Profile.findAll();
     res.json(admin);
+});
+
+router.post("/login", async(req, res) => {
+    try{
+        const { email, password } = req.body;
+
+        const user = await Admin_Profile.findOne({where: {email: email}});
+
+        if(!user) return res.json({error: "Admin User not Found"});
+
+        bcrypt.compare(password, user.password).then((match) => {
+            if(!match) return res.json({error: "Email or password is incorrect"});
+
+            const accessToken = createToken(user);
+
+            res.cookie("token", accessToken, {
+                maxAge: 60 * 60 * 12 * 1000,
+                httpOnly: true,
+            });
+
+            res.json("Login success");
+        });
+    }catch (err) {
+        console.log(err.message);
+    }
+});
+
+router.get("/logout", removeToken, async(req, res) => {
+    res.json("Log out");
 });
 
 module.exports = router;
