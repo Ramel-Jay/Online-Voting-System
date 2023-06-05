@@ -5,6 +5,7 @@ import Admin from "./pages/login_admin";
 import Welcome from "./pages/welcome";
 import AdminRegister from "./pages/Admin/register";
 import AdminWelcome from "./pages/Admin/welcome";
+import AdminDashbord from "./pages/Admin/dashboard"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" exact element={<Welcome/>}/>
           <Route path="/admin/register" exact element={<AdminRegister/>}/>
           <Route path="/admin" exact element={<AdminWelcome/>}/>
+          <Route path="/admin/dashboard" exact element={<AdminDashbord/>}/>
         </Routes>
       </Router>
     </>
