@@ -13,12 +13,15 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use(cors({origin: ["http://localhost:3000"]}));
+app.use(express.static('public'));
 
 const db = require('./models');
 
 //Routers
 const AdminRouter = require('./routes/Admin');
 app.use('/', AdminRouter);
+
+
 
 db.sequelize.sync().then(() => {
     app.listen(3001, () => {

@@ -41,7 +41,7 @@ function register() {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:3001/admins/").then((response) => {
+        axios.get("http://localhost:3001/").then((response) => {
             if(response.data.error){
                 alert(response.data.error);
             }

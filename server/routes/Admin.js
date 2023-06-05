@@ -11,8 +11,6 @@ const cookieParser = require('cookie-parser');
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
-// app.use(express.static(`public`));
-app.use('/avatar',express.static(path.join(__dirname, 'public')));
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -34,7 +32,13 @@ const upload = multer({
     }
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/avatar',express.static('public'));
+// app.use('/avatar',express.static(path.join(__dirname, '../public/avatar')));
+// app.use('/', express.static(__dirname + '../public/avatar'));
+// app.use('/avatar', express.static(__dirname + '../public/avatar'));
+
+// const profileImage = path.resolve(__dirname, '../public');
+// app.use(express.static(profileImage));
 
 router.post('/AdminProfile', upload.single('avatar_url'), async(req, res) => {
     try{
@@ -73,7 +77,7 @@ router.post('/AdminProfile', upload.single('avatar_url'), async(req, res) => {
     }
 });
 
-router.get("/admins", async (req, res) => {
+router.get("/", async (req, res) => {
     const admin = await Admin_Profile.findAll();
     res.json(admin);
 });
