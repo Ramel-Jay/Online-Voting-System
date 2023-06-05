@@ -81,10 +81,10 @@ router.post("/login", async(req, res) => {
 
         const user = await Admin_Profile.findOne({where: {email: email}});
 
-        if(!user) return res.json({error: "Admin User not Found"});
+        if(!user) return res.json("Admin User not Found");
 
         bcrypt.compare(password, user.password).then((match) => {
-            if(!match) return res.json({error: "Email or password is incorrect"});
+            if(!match) return res.json("Email or password is incorrect");
 
             const accessToken = createToken(user);
 
