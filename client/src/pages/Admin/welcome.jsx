@@ -11,7 +11,7 @@ function welcome() {
 
     const login = () => {
         const data = { email: email, password: password };
-        axios.post("http://localhost:3001/login", data, { withCredentials: true }).then((response) => {
+        axios.post("http://localhost:3001/login", data, { method: "POST", headers: { "Content-Type": "application/json", }, withCredentials: "include" }).then((response) => {
             if(response.data.error){
                 alert("Invalid email or password");
                 navigate("/admin");
