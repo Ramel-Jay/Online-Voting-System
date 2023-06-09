@@ -105,4 +105,11 @@ router.get("/logout", removeToken, async(req, res) => {
     res.json("Log out");
 });
 
+router.get("/getUser", validateToken, async (req, res) => {
+    const first_name = req.user.first_name;
+    const avatar_url = req.user.avatar_url;
+
+    res.send({first_name, avatar_url});
+})
+
 module.exports = router;
