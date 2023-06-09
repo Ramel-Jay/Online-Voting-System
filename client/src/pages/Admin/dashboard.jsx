@@ -21,7 +21,7 @@ function dashboard() {
     <div>
         <h1>Dashboard</h1>
         <button onClick={() => navigate("/admin/register")} className="bg-gray-700 text-white">Register</button>
-        <button type="submit" onClick={() => {logout}}>Log Out</button>
+        <button type="submit" onClick={logout}>Log Out</button>
     </div>
   )
 }

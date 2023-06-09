@@ -103,7 +103,6 @@ router.post("/login", async(req, res) => {
 
 router.get("/logout", removeToken, async(req, res) => {
     res.json("Log out");
-    process.exit(0);
 });
 
 module.exports = router;
