@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const createToken = (user) => {
-    const accessToken = jwt.sign({email: user.email, id: user.id, avatar_url: user.avatar_url, first_name: user.first_name}, "Secret12345Token");
+    const accessToken = jwt.sign({ id: user.id, avatar_url: user.avatar_url, first_name: user.first_name}, "Secret12345Token");
     return accessToken;
 }
 
